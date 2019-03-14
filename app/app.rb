@@ -62,12 +62,13 @@ end
 
 on :mouse_down do |event|
   # x and y coordinates of the mouse button event
-  puts event.x, event.y
+  
 
 
   board1.each do |cell| 
     if event.x < cell.square.x + cell.square.size && event.x > cell.square.x && event.y < cell.square.y + cell.square.size && event.y > cell.square.y 
       cell.square.color = 'teal'
+      puts cell.col, cell.row
       break
     end
   end
@@ -75,6 +76,8 @@ on :mouse_down do |event|
   board2.each do |cell| 
     if event.x < cell.square.x + cell.square.size && event.x > cell.square.x && event.y < cell.square.y + cell.square.size && event.y > cell.square.y 
       cell.square.color = 'blue'
+      puts cell.col, cell.row
+
       break
     end
   end
