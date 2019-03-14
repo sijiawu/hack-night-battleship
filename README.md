@@ -9,3 +9,30 @@ A battleship is sunk when the opposing player guesses all grid locations of one 
 ## Implementation
 
 We are going to build a player to player version of this across a network. This will be a two part challenge: you will need to establish a connection with another player and create the game/UI logic.
+
+
+## Notes
+
+
+Classes to make:
+
+```
+ship
+  positions[]
+  player_id
+board
+  grid
+player
+  name
+  ip_addr
+  board
+game
+  players
+```
+
+Functions:
+
+1. check position for ship - local
+1. check position for ship - over network
+1. hit ship if position is correct
+1. connect to player
