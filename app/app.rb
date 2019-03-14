@@ -1,4 +1,5 @@
 require 'ruby2d'
+require_relative './board'
 
 set title: "Battleship"
 set background: 'gray'
@@ -9,6 +10,11 @@ start2X = 340
 size = 25
 board1 = []
 board2 = []
+
+column_key = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+board1obj = Board.new
+board2obj = Board.new
 
 class Cell
   attr_accessor :col, :row, :square
@@ -62,13 +68,14 @@ end
 
 on :mouse_down do |event|
   # x and y coordinates of the mouse button event
-  
-
 
   board1.each do |cell| 
     if event.x < cell.square.x + cell.square.size && event.x > cell.square.x && event.y < cell.square.y + cell.square.size && event.y > cell.square.y 
       cell.square.color = 'teal'
-      puts cell.col, cell.row
+      coordinate = column_key[cell.col].to_s + (cell.row + 1).to_s
+      p coordinate
+      board1obj.set_cell(coordinate, 1)
+      p board1obj.get_grid()
       break
     end
   end
@@ -76,8 +83,10 @@ on :mouse_down do |event|
   board2.each do |cell| 
     if event.x < cell.square.x + cell.square.size && event.x > cell.square.x && event.y < cell.square.y + cell.square.size && event.y > cell.square.y 
       cell.square.color = 'blue'
-      puts cell.col, cell.row
-
+      coordinate = column_key[cell.col].to_s + (cell.row + 1).to_s
+      p coordinate
+      board2obj.set_cell(coordinate, 1)
+      p board2obj.get_grid()
       break
     end
   end
