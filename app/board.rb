@@ -22,23 +22,28 @@ class Board
 
   def randomize_grid()
     self.grid.each do |rowname, row|
-      for cell in row do
-        cell = rand 10
+      row.each_index do |pos|
+        self.grid[rowname][pos] = rand 10
       end
     end
   end
 
   def add_ship(length, direction, start)
+    ship = Ship.new
     for pos in 0..length do
-      self.grid[pos]
+      self.set_cell(start, ship)
     end
   end
 
   def check_occupied(position)
-
+    self.get_cell(position) > 0
   end
 
-  def get_id(position)
-    self.grid[position[0]][position[1].to_i]
+  def get_cell(position)
+    self.grid[position[0]][position[1].to_i - 1]
+  end
+
+  def set_cell(position, value)
+    self.grid[position[0]][position[1].to_i - 1] = value
   end
 end
