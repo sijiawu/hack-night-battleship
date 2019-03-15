@@ -1,30 +1,19 @@
 require 'socket'
-require_relative './board'
 
 class Game
-  def start_server()
-    server = TCPServer.open(2000)
-    board = Board.new
-    board.randomize_grid()
-    loop {
-       client = server.accept
-       client.puts('a5')
-       client.close
-    }
+  def start_server
+    STDOUT.puts("Please enter the Port")
+    port = STDIN.gets.chomp
+
+    Server.new port
   end
-  def start_client()
-    board = Board.new
-    board.randomize_grid()
+  def start_client
+    STDOUT.puts("Please enter the server IP")
+    server = STDIN.gets.chomp
+    STDOUT.puts("Please enter the Port")
+    port = STDIN.gets.chomp
 
-    hostname = 'localhost'
-    port = 2000
-
-    s = TCPSocket.open(hostname, port)
-
-    while line = s.gets
-      puts line.chop
-      puts board.check_occupied(line.chop)
-    end
-    s.close
+    socket = TCPSocket.open(server, port)
+    Client.new(socket)
   end
 end
